@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 int user_nav_comand;
 
 void singup(){
