@@ -58,6 +58,7 @@ Account searchAccountByAccountNumber(int accountNumber, int accountPin)
         {
             if (accountPin == -1)
             {
+                found = 1;
                 return account;
             }
             if (account.accountPin == accountPin)
@@ -76,7 +77,7 @@ Account searchAccountByAccountNumber(int accountNumber, int accountPin)
     }
 }
 
-void replaceAccountInCSV(int accountNumber, int accountPin, double newBalance, double accountLoan)
+void replaceAccountInCSV(int accountNumber, int accountPin, int newBalance, int accountLoan)
 {
     FILE *csvFile = fopen("accounts.csv", "r+");
 
@@ -109,6 +110,19 @@ void replaceAccountInCSV(int accountNumber, int accountPin, double newBalance, d
             break;
         }
     }
+
+    fclose(csvFile);
+}
+
+void appendAccountToCSV(int accountNumber, char accountHolder[MAX_LINE_LENGTH], int accountPin, int accountBalance, int accountLoan) {
+    FILE *csvFile = fopen("accounts.csv", "a");
+
+    if (csvFile == NULL) {
+        fprintf(stderr, "Failed to open the CSV file.\n");
+        return;
+    }
+
+    fprintf(csvFile, "%d,%d,%s,%d,%d\n", accountNumber, accountPin, accountHolder, accountBalance, accountLoan);
 
     fclose(csvFile);
 }

@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+
 #include "transaction.h"
 #include "db_operation.h"
 
-int user_nav_comand;
+char user_nav_command;
 
 void clear_screen()
 {
@@ -14,34 +17,38 @@ void clear_screen()
 #endif
 }
 
-void singup()
+void signup()
 {
-    char name[100];
+    char name[MAX_LINE_LENGTH];
     long number;
     int pin;
-    int id = 2121;
+
+    srand(time(NULL));
+    int id = rand() % 9000 + 1000;
 
     printf("\n\t\t\t\t Enter Your Name: ");
     scanf(" %[^\n]s", &name);
-    printf("\n\t\t\t\t Enter Your Mobile Number: ");
+    printf("\n\t\t\t\t Enter Your NID Number: ");
     scanf("%ld", &number);
     printf("\n\t\t\t\t Enter A new PIN: ");
     scanf("%d", &pin);
 
     clear_screen();
     printf("\n\n \t\t\t\t********** SRF Bank Sign Up Success **********\n\n");
-    printf("\n\t\t\t\tName Is %s", name);
-    printf("\n\t\t\t\tPhone Number %ld", number);
-    printf("\n\t\t\t\tID %d", id);
-    printf("\n\t\t\t\tPIN For Account %d", pin);
+    printf("\n\t\t\t\t Name is %s", name);
+    printf("\n\t\t\t\t NID Number %ld", number);
+    printf("\n\t\t\t\t Bank ID %d", id);
+    printf("\n\t\t\t\t PIN For Account %d", pin);
+    printf("\n\t\t\t\t Redirecting to login page...\n");
+    appendAccountToCSV(id, name, pin, 0, 0);
 
-    // Aper successfully sign up user redirect main page its your work
-
-    printf("\n\n\n\n\n\n\n\n\n\n");
+    sleep(5);
+    login();
 }
 
 void login()
 {
+    clear_screen();
     int given_user_id, given_user_pin;
 
     printf("\n\t\t\t\t Enter Your Account Number: ");
@@ -67,12 +74,12 @@ int main()
         printf("\t\t\t\t Q. Quit \n");
 
         printf("\n\n\t\t\t\t Select What You Want: ");
-        scanf(" %c", &user_nav_comand);
+        scanf(" %c", &user_nav_command);
 
-        switch (user_nav_comand)
+        switch (user_nav_command)
         {
         case '1':
-            singup();
+            signup();
             break;
         case '2':
             login();
@@ -81,9 +88,9 @@ int main()
         case 'q':
             printf("\n\n\t\t\t\t\t Bye Bye \n");
             exit(0);
+        default:
+            printf("\t\t\t\t\t Invalid Entry");
             break;
         }
-    
-
     return 0;
 }
