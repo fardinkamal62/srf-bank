@@ -28,7 +28,7 @@ Account globalData;
 void can_back()
 {
     globalData = db_operation(id, pin);
-    printf("\n\n\t\t\t\t 1. Go Back: ");
+    printf("\n\n\t\t\t\t\t 1. Go Back: ");
     scanf("%d", &go_back);
     if (go_back == 1)
     {
@@ -37,7 +37,7 @@ void can_back()
     }
     else
     {
-        printf("\n\n\t\t\t\t Command Valid Input: ");
+        printf("\n\n\t\t\t\t\t Command Valid Input: ");
         scanf("%d", &go_back);
         if (go_back == 1)
         {
@@ -46,7 +46,7 @@ void can_back()
         }
         else
         {
-            printf("\n\n\t\t\t\t You Input Multiple Time");
+            printf("\n\n\t\t\t\t\t You Input Multiple Time");
         }
     }
 }
@@ -54,24 +54,24 @@ void can_back()
 void withdraw()
 {
     clear_screen();
-    printf("\n\n \t\t\t\t********** SRF Bank Withdraw System **********\n\n");
-    printf("\n\t\t\t\tMaximum Withdraw Amount: %d", balance);
-    printf("\n\t\t\t\tEnter An Amount: ");
+    printf("\n\t\t\t\t\t********** SRF Bank Withdraw System **********\n\n");
+    printf("\n\t\t\t\t\tMaximum Withdraw Amount: %d", balance);
+    printf("\n\t\t\t\t\tEnter An Amount: ");
     scanf("%d", &withdraw_balance);
 
     clear_screen();
     if (withdraw_balance <= balance)
     {
         balance -= withdraw_balance; // Update the balance by subtracting the withdrawal amount
-        printf("\n\n \t\t\t\t********** Withdrawal Is Successful **********\n\n");
-        printf("\n\t\t\t\tWithdrawn Amount: %d", withdraw_balance);
-        printf("\n\t\t\t\tNew Balance: %d", balance);
+        printf("\n\t\t\t\t\t********** Withdrawal Is Successful **********\n\n");
+        printf("\n\t\t\t\t\tWithdrawn Amount: %d", withdraw_balance);
+        printf("\n\t\t\t\t\tNew Balance: %d", balance);
         replaceAccountInCSV(id, pin, balance, loan);
         can_back();
     }
     else
     {
-        printf("\n\n \t\t\t\t********** Insufficient Balance **********\n\n");
+        printf("\n\t\t\t\t\t********** Insufficient Balance **********\n\n");
         printf("\n\t\t\t\tCurrent Balance: %d", balance);
         can_back();
     }
@@ -82,25 +82,25 @@ void withdraw()
 void deposit()
 {
     clear_screen();
-    printf("\n\n \t\t\t\t********** SRF Bank Deposit System **********\n\n");
-    printf("\n\t\t\t\tEnter Amount: ");
+    printf("\n\t\t\t\t\t********** SRF Bank Deposit System **********\n\n");
+    printf("\n\t\t\t\t\tEnter Amount: ");
     scanf("%d", &deposit_balance);
 
     clear_screen();
     if (deposit_balance > 0)
     {
         balance += deposit_balance; // Update the balance by adding the deposit amount
-        printf("\n\n \t\t\t\t********** Deposit Is Successful **********\n\n");
-        printf("\n\t\t\t\tDeposit Amount: %d", deposit_balance);
-        printf("\n\t\t\t\tNew Balance: %d", balance);
+        printf("\n\t\t\t\t\t********** Deposit Is Successful **********\n\n");
+        printf("\n\t\t\t\t\tDeposit Amount: %d", deposit_balance);
+        printf("\n\t\t\t\t\tNew Balance: %d", balance);
         replaceAccountInCSV(id, pin, balance, loan);
         can_back();
     }
     else
     {
-        printf("\n\n \t\t\t\t********** Invalid Deposit Amount **********\n\n");
-        printf("\n\t\t\t\tName: %s", name);
-        printf("\n\t\t\t\tCurrent Balance: %d", balance);
+        printf("\n\t\t\t\t\t********** Invalid Deposit Amount **********\n\n");
+        printf("\n\t\t\t\t\tName: %s", name);
+        printf("\n\t\t\t\t\tCurrent Balance: %d", balance);
         can_back();
     }
 
@@ -111,11 +111,11 @@ void send_money()
 {
     int reciever_new_balance;
     clear_screen();
-    printf("\n\n \t\t\t\t********** SRF Bank Send Money System **********\n\n");
-    printf("\n\t\t\t\tYour Balance Is: %d", balance);
-    printf("\n\t\t\t\tEnter An Amount: ");
+    printf("\n\t\t\t\t\t********** SRF Bank Send Money System **********\n\n");
+    printf("\n\t\t\t\t\tYour Balance Is: %d", balance);
+    printf("\n\t\t\t\t\tEnter An Amount: ");
     scanf("%d", &sent_money_balance);
-    printf("\n\t\t\t\tEnter Account Number: ");
+    printf("\n\t\t\t\t\tEnter Account Number: ");
     scanf("%d", &r_account);
 
     Account reciever = searchAccountByAccountNumber(r_account, -1);
@@ -126,19 +126,19 @@ void send_money()
     {
         sleep(1);
         balance -= sent_money_balance; // Update the balance by subtracting the withdrawal amount
-        printf("\n\n \t\t\t\t********** Send Money Is Successful **********\n\n");
-        printf("\n\t\t\t\tSent Amount: %d", sent_money_balance);
-        printf("\n\t\t\t\tReceiver: %s", reciever.accountHolder);
-        printf("\n\n\t\t\t\tNew Balance: %d", balance);
+        printf("\n\t\t\t\t\t********** Send Money Is Successful **********\n\n");
+        printf("\n\t\t\t\t\tSent Amount: %d", sent_money_balance);
+        printf("\n\t\t\t\t\tReceiver: %s", reciever.accountHolder);
+        printf("\n\n\t\t\t\t\tNew Balance: %d", balance);
         replaceAccountInCSV(id, pin, balance, loan);
         replaceAccountInCSV(reciever.accountNumber, reciever.accountPin, reciever_new_balance, reciever.accountLoan);
         can_back();
     }
     else
     {
-        printf("\n\n \t\t\t\t********** Insufficient Balance **********\n\n");
-        printf("\n\t\t\t\tName: %s", name);
-        printf("\n\t\t\t\tCurrent Balance: %d", balance);
+        printf("\n\t\t\t\t\t********** Insufficient Balance **********\n\n");
+        printf("\n\t\t\t\t\tName: %s", name);
+        printf("\n\t\t\t\t\tCurrent Balance: %d", balance);
         can_back();
     }
 
@@ -150,17 +150,18 @@ void get_loan()
     if (globalData.accountLoan == 0)
     {
         clear_screen();
-        printf("\n\n \t\t\t\t********** SRF Bank Loan System **********\n\n");
+        printf("\n\t\t\t\t\t********** SRF Bank Loan System **********\n\n");
         printf("\n\t\t\t\tYour Balance Is: %d", balance);
         printf("\n\t\t\t\tEnter An Amount: ");
         scanf("%d", &loan_request_balance);
 
         balance += loan_request_balance;
         clear_screen();
-        printf("\n\n\n\t\t\t\tThank Your For Request A Loan", balance);
+        printf("\n\n\n\t\t\t\t\tThank Your For Loan Request", balance);
         sleep(1);
-        printf("\n\t\t\t\tYour request is successful");
-        printf("\n\t\t\t\tNew Balance %d", balance);
+        printf("\n\t\t\t\t\tYour request is successful");
+        printf("\n\t\t\t\t\tLoan Amount %d", loan);
+        printf("\n\n\t\t\t\t\tNew Balance %d", balance);
         replaceAccountInCSV(id, pin, balance, loan_request_balance);
         can_back();
 
@@ -180,7 +181,7 @@ void get_loan()
 void balance_inquiry()
 {
     clear_screen();
-    printf("\n\n \t\t\t\t********** SRF Bank Balance Inquiry System **********\n\n");
+    printf("\n\t\t\t\t\t********** SRF Bank Balance Inquiry System **********\n\n");
     printf("\n\t\t\t\t Hello %s", name);
     printf("\n\t\t\t\t Your Balance is %d", balance);
     can_back();
@@ -190,8 +191,8 @@ void change_pin()
 {
     int pin_cry;
     clear_screen();
-    printf("\n\n \t\t\t\t********** SRF Bank PIN Change System **********\n\n");
-    printf("\n\t\t\t\t Enter Your Old PIN: ");
+    printf("\n\t\t\t\t\t********** SRF Bank PIN Change System **********\n\n");
+    printf("\n\t\t\t\t\t Enter Your Old Pin: ");
     scanf("%d", &pin_cry);
     if (pin_cry == pin)
     {
@@ -205,17 +206,27 @@ void change_pin()
     }
     else
     {
-        printf("\n\n \t\t\t\tYou Enter Wrong old PIN . Please Try Again Later\n\n");
+        printf("\n\t\t\t\t\t\tYou Enter Wrong old PIN . Please Try Again Later\n\n");
         can_back();
     }
 }
 
-void pay_loan(){
+void pay_loan()
+{
     int pay_loan_balance;
     clear_screen();
-    printf("\n\n \t\t\t\t********** SRF Bank Loan System **********\n\n");
+    printf("\n\t\t\t\t\t********** SRF Bank Loan System **********\n\n");
     printf("\n\t\t\t\tYour Balance Is: %d", balance);
-    printf("\n\t\t\t\tEnter An Amount: ");
+    printf("\n\t\t\t\tYour Loan Amount Is: %d", loan);
+
+    if (loan == 0)
+    {
+        printf("\n\n\n\t\t\t\t\t********** Loan Already Paid **********\n\n");
+        can_back();
+        return;
+    }
+
+    printf("\n\n\t\t\t\tEnter An Amount: ");
     scanf("%d", &pay_loan_balance);
 
     if (pay_loan_balance <= balance)
@@ -223,7 +234,7 @@ void pay_loan(){
         sleep(1);
         int new_loan = loan - pay_loan_balance;
         balance -= pay_loan_balance; // Update the balance by subtracting the withdrawal amount
-        printf("\n\n \t\t\t\t********** Loan Pay Is Successful **********\n\n");
+        printf("\n\t\t\t\t\t********** Loan Pay Is Successful **********\n\n");
         printf("\n\t\t\t\tLoan Paid Amount: %d", pay_loan_balance);
         printf("\n\t\t\t\tNew Balance: %d", balance);
         replaceAccountInCSV(id, pin, balance, new_loan);
@@ -232,7 +243,7 @@ void pay_loan(){
 
     else
     {
-        printf("\n\n \t\t\t\t********** Insufficient Balance **********\n\n");
+        printf("\n\t\t\t\t\t********** Insufficient Balance **********\n\n");
         printf("\n\t\t\t\tName: %s", name);
         printf("\n\t\t\t\tCurrent Balance: %d", balance);
         can_back();
@@ -251,54 +262,54 @@ int transaction(Account data)
     loan = data.accountLoan;
 
     clear_screen();
-    printf("\t\t\t\t********** SRF Bank **********\n\n");
-    printf("\n\t\t\t\t Hello %s\n", data.accountHolder);
-    printf("\t\t\t\t Current Balance %d\n", data.accountBalance);
-    printf("\t\t\t\t Loan Amount %d\n\n", data.accountLoan);
-    printf("\n\t\t\t\t\t 1. Withdraw \n");
-    printf("\t\t\t\t\t 2. Deposit \n");
-    printf("\t\t\t\t\t 3. Send money \n");
-    printf("\t\t\t\t\t 4. Get Loan \n");
-    printf("\t\t\t\t\t 5. Balance Inquiry \n");
-    printf("\t\t\t\t\t 6. Change PIN \n");
-    printf("\t\t\t\t\t 7. Pay Loan \n");
-    printf("\t\t\t\t\t Q. Quit \n");
+    printf("\n\t\t\t\t\t********** SRF Bank **********\n\n");
+    printf("\n\t\t\t\t\t Hello %s", data.accountHolder);
+    printf("\n\t\t\t\t\t Current Balance %d", data.accountBalance);
+    printf("\n\t\t\t\t\t Loan Amount %d\n\n", data.accountLoan);
+    printf("\n\t\t\t\t\t 1. Withdraw");
+    printf("\n\t\t\t\t\t 2. Deposit");
+    printf("\n\t\t\t\t\t 3. Send money");
+    printf("\n\t\t\t\t\t 4. Get Loan");
+    printf("\n\t\t\t\t\t 5. Pay Loan");
+    printf("\n\t\t\t\t\t 6. Change PIN");
+    printf("\n\t\t\t\t\t Q. Quit");
 
-    printf("\n\n\t\t\t\t Select What You Want: ");
-    scanf(" %c", &nav_command);
-
-    switch (nav_command)
+    while (1)
     {
-    case '1':
-        withdraw();
-        break;
+        printf("\n\n\t\t\t\t\t Select Option: ");
+        scanf(" %c", &nav_command);
 
-    case '2':
-        deposit();
-        break;
+        switch (nav_command)
+        {
+        case '1':
+            withdraw();
+            break;
 
-    case '3':
-        send_money();
-        break;
+        case '2':
+            deposit();
+            break;
 
-    case '4':
-        get_loan();
-        break;
+        case '3':
+            send_money();
+            break;
 
-    case '5':
-        balance_inquiry();
-        break;
+        case '4':
+            get_loan();
+            break;
 
-    case '6':
-        change_pin();
-        break;
+        case '5':
+            pay_loan();
+            break;
 
-    case '7':
-        pay_loan();
-    case 'q':
-    case 'Q':
-        printf("\n\n\t\t\t\t\t Bye Bye \n");
-        exit(0);
-        break;
+        case '6':
+            change_pin();
+            break;
+
+        case 'q':
+        case 'Q':
+            printf("\n\n\t\t\t\t\t\t Bye Bye \n");
+            exit(0);
+            break;
+        }
     }
 }

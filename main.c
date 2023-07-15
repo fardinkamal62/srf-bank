@@ -15,7 +15,25 @@ void clear_screen()
 #else
     system("clear"); // Clear screen on Linux
 #endif
-}
+};
+
+void login()
+{
+    int given_user_id, given_user_pin;
+
+    printf("\n\t\t\t\t\t Enter Your Account Number: ");
+    scanf("%d", &given_user_id);
+    printf("\t\t\t\t\t Enter Your Account PIN: ");
+    scanf("%d", &given_user_pin);
+    Account data = db_operation(given_user_id, given_user_pin);
+
+    if (data.accountNumber != 0)
+    {
+        clear_screen();
+        printf("\n\t\t\t\t\t********** SRF Bank Log In Success **********\n\n");
+        transaction(data);
+    }
+};
 
 void signup()
 {
@@ -34,48 +52,30 @@ void signup()
     scanf("%d", &pin);
 
     clear_screen();
-    printf("\n\n \t\t\t\t********** SRF Bank Sign Up Success **********\n\n");
+    printf("\n\t\t\t\t\t********** SRF Bank Sign Up Success **********\n\n");
     printf("\n\t\t\t\t Name is %s", name);
     printf("\n\t\t\t\t NID Number %ld", number);
-    printf("\n\t\t\t\t Bank ID %d", id);
+    printf("\n\t\t\t\t Account Number %d", id);
     printf("\n\t\t\t\t PIN For Account %d", pin);
     printf("\n\t\t\t\t Redirecting to login page...\n");
     appendAccountToCSV(id, name, pin, 0, 0);
 
     sleep(5);
     login();
-}
-
-void login()
-{
-    clear_screen();
-    int given_user_id, given_user_pin;
-
-    printf("\n\t\t\t\t Enter Your Account Number: ");
-    scanf("%d", &given_user_id);
-    printf("\t\t\t\t Enter Your Account PIN: ");
-    scanf("%d", &given_user_pin);
-    Account data = db_operation(given_user_id, given_user_pin);
-
-    if (data.accountNumber != 0)
-    {
-        clear_screen();
-        printf("\n\n \t\t\t\t********** FSS Bank Log In Success **********\n\n");
-        transaction(data);
-    }
-}
+};
 
 int main()
 {
-        clear_screen();
-        printf("\n\n \t\t\t\t********** SRF Bank **********\n\n");
-        printf("\t\t\t\t 1. Sign Up \n");
-        printf("\t\t\t\t 2. Log In \n");
-        printf("\t\t\t\t Q. Quit \n");
+    clear_screen();
+    printf("\n\t\t\t\t\t********** SRF Bank **********\n\n");
+    printf("\t\t\t\t\t\t 1. Sign Up \n");
+    printf("\t\t\t\t\t\t 2. Log In \n");
+    printf("\t\t\t\t\t\t Q. Quit \n");
 
-        printf("\n\n\t\t\t\t Select What You Want: ");
+    while (1)
+    {
+        printf("\n\n\t\t\t\t\t Select Option: ");
         scanf(" %c", &user_nav_command);
-
         switch (user_nav_command)
         {
         case '1':
@@ -86,11 +86,12 @@ int main()
             break;
         case 'Q':
         case 'q':
-            printf("\n\n\t\t\t\t\t Bye Bye \n");
+            printf("\n\n\t\t\t\t\t\t Bye Bye! \n");
             exit(0);
         default:
-            printf("\t\t\t\t\t Invalid Entry");
+            printf("\n\n\t\t\t\t\t\t Invalid Entry");
             break;
         }
+    }
     return 0;
-}
+};
