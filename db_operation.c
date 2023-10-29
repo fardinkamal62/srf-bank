@@ -41,7 +41,7 @@ Account parseAccountFromCSV(const char *line)
 
 Account searchAccountByAccountNumber(int accountNumber, int accountPin)
 {
-    FILE *csvFile = fopen("accounts.csv", "r");
+    FILE *csvFile = fopen("../accounts.csv", "r");
 
     if (csvFile == NULL)
     {
