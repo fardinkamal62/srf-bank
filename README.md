@@ -20,7 +20,7 @@
   
   <h2>Usage</h2>
   <ol>
-    <li>Clone the repository: <code>git clone https://github.com/your-username/banking-app.git</code></li>
+    <li>Clone the repository: <code>git clone https://github.com/fardinkamal62/srf-bank.git</code></li>
     <li>Open the project in a code editor of your choice</li>
     <li>Launch the application using Terminal</li>
     <li>Follow the on-screen instructions to navigate through the application</li>
